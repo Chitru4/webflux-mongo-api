@@ -22,4 +22,19 @@ public class RuleController {
         return ruleService.saveRule(rule);
     }
 
+    @GetMapping(value = "/{id}")
+    public Mono<Rule> getRuleById(@PathVariable("id") Long id) {
+        return ruleService.findById(id);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public Mono<Void> deleteRuleById(@PathVariable("id") Long id) {
+        return ruleService.deleteById(id);
+    }
+
+    @PutMapping(value = "/{id}")
+    public Mono<Rule> updateRuleById(@PathVariable("id") Long id, @RequestBody Rule rule) {
+        return ruleService.updateRule(id, rule);
+    }
+
 }

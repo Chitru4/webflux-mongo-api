@@ -1,16 +1,18 @@
 package com.example.webflux.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "rule")
 public class Rule {
     @Id
-    private ObjectId _id;
     private Long id;
+    @Field(name = "name")
     private String name;
+    @Field(name = "description")
     private String description;
+    @Field(name = "policy")
     private String policy;
 
     public Rule() {}

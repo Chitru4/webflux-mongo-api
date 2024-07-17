@@ -11,8 +11,11 @@ import reactor.core.publisher.Mono;
 @Service
 @Transactional
 public class RuleService {
-    @Autowired
     RuleRepository ruleRepository;
+    @Autowired
+    public RuleService(RuleRepository ruleRepository) {
+        this.ruleRepository = ruleRepository;
+    }
 
     public Flux<Rule> findAll() {
         return ruleRepository.findAll();
@@ -20,5 +23,17 @@ public class RuleService {
 
     public Mono<Rule> saveRule(Rule rule) {
         return ruleRepository.save(rule);
+    }
+
+    public Mono<Rule> findById(Long id) {
+        return ruleRepository.findById(id);
+    }
+
+    public Mono<Rule> updateRule(Long id, Rule rule) {
+        return ruleRepository.findById(id).flatMap(ruleRepository::save);
+    }
+
+    public Mono<Void> deleteById(Long id) {
+        return ruleRepository.deleteById(id);
     }
 }
